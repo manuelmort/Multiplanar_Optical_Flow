@@ -1,0 +1,72 @@
+<?xml version="1.0" ?>
+<sdf version="1.7">
+  <world name="world_demo">
+  
+    <!-- Physics -->
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.01</max_step_size>
+      <real_time_factor>1</real_time_factor>
+    </physics>
+
+    <!-- Core Plugins -->
+    <plugin name="ignition::gazebo::systems::Physics" filename="libignition-gazebo-physics-system.so"/>
+    <plugin name="ignition::gazebo::systems::UserCommands" filename="libignition-gazebo-user-commands-system.so"/>
+    <plugin name="ignition::gazebo::systems::SceneBroadcaster" filename="libignition-gazebo-scene-broadcaster-system.so"/>
+    <plugin name="ignition::gazebo::systems::Imu" filename="libignition-gazebo-imu-system.so"/>
+    <plugin name="ignition::gazebo::systems::Sensors" filename="libignition-gazebo-sensors-system.so">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+
+    <!-- Visual Scene -->
+    <scene>
+      <ambient>1 1 1 1</ambient>
+      <background>0.3 0.7 0.9 1</background>
+      <shadows>0</shadows>
+      <grid>1</grid>
+    </scene>
+
+    <!-- Ground Plane -->
+    <model name="ground_plane">
+      <static>1</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+        </collision>
+      </link>
+      <pose>0 0 0 0 0 0</pose>
+    </model>
+
+    <!-- External Fuel Models -->
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Depot</uri>
+      <pose>7.19009 1.09982 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/MovAi/models/Tugbot</uri>
+      <name>tugbot</name>
+      <pose>2.75268 1.0014 0.132279 0 0 0</pose>
+    </include>
+
+    <!-- Collision Proxy for Depot (Optional) -->
+    <model name="depot_collision">
+      <static>1</static>
+      <pose>7.19009 1.09982 0 0 0 0</pose>
+      <link name="collision_link">
+        <collision name="bounding_box">
+          <geometry>
+            <box>
+              <size>30 15 10</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+
+  </world>
+</sdf>

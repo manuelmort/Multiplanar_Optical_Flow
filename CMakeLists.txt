@@ -25,6 +25,7 @@ install(PROGRAMS
   nodes/fixed_kmeans.py
   nodes/controller.py
   nodes/tau_computation.py
+  nodes/clipped_kmeans.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
